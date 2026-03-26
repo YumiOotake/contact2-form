@@ -17,9 +17,7 @@
                     <select name="gender" class="search-form__item-input">
                         <option value="">性別</option>
                         @foreach ($contacts as $contact)
-                            {{-- <option value="{{ $category->id }}"
-                                {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}
-                            </option> --}}
+
                         @endforeach
                     </select>
                 </div>
@@ -45,9 +43,9 @@
         <div class="admin-content__export">
             <a href="" class="admin-content__export--button">エクスポート</a>
         </div>
-        <div class="admin-content__paginate">
+        {{-- <div class="admin-content__paginate">
             {{ $contacts->appends(request()->query())->links() }}
-        </div>
+        </div> --}}
 
         <div class="contact-table">
             <table class="contact-table__inner">
@@ -63,8 +61,8 @@
                 <tbody>
                     @forelse ($contacts as $contact)
                         <tr class="contact-table__row">
-                            <td class="contact-table__item">{{ $contact->name }}</td>
-                            <td class="contact-table__item">{{ $contact->gender }}</td>
+                            <td class="contact-table__item">{{ $contact->full_name }}</td>
+                            <td class="contact-table__item">{{ $contact->gender_label }}</td>
                             <td class="contact-table__item">{{ $contact->email }}</td>
                             <td class="contact-table__item">{{ $contact->category->content }}</td>
                             <td class="contact-table__item">
@@ -83,7 +81,7 @@
                 </tbody>
             </table>
 
-            @forelse ($contacts as $contact)
+            {{-- @forelse ($contacts as $contact)
                 <dialog id="modal-{{ $contact->id }}" class="modal">
                     <button class="js-modal-close modal__close">×</button>
                     <div class="modal__inner">
@@ -131,8 +129,7 @@
                         </form>
                     </div>
                 </dialog>
-            @endforelse
+            @endforelse --}}
         </div>
-
     </div>
 @endsection

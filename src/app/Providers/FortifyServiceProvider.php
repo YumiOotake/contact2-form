@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -20,7 +24,15 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        app()->bind(
+            \Laravel\Fortify\Http\Requests\RegisterRequest::class,
+            RegisterRequest::class
+        );
+
+        app()->bind(
+            \Laravel\Fortify\Http\Requests\LoginRequest::class,
+            LoginRequest::class
+        );
     }
 
     /**
@@ -28,6 +40,19 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        Fortify::authenticateUsing(function (Request $request){
+
+            if(Auth::attempt($request->only('email', 'password'))) {
+                return Auth::user();
+            }
+
+            // return null;
+            throw ValidationException::withMessages([
+                'email' => ['ログイン情報が登録されていません'],
+            ]);
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
         // Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         // Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

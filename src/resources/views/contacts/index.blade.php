@@ -15,13 +15,18 @@
                     <span class="contact-form__label--span">※</span>
                 </div>
                 <div class="contact-form__group-content">
-                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name', session('first_name')) }}"
-                        class="contact-form__input--text" placeholder="例: 山田">
-                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name', session('last_name')) }}"
-                        class="contact-form__input--text" placeholder="例: 太郎">
+                    <input type="text" id="first_name" name="first_name"
+                        value="{{ old('first_name', session('first_name')) }}" class="contact-form__input--text"
+                        placeholder="例: 山田">
+                    <input type="text" id="last_name" name="last_name"
+                        value="{{ old('last_name', session('last_name')) }}" class="contact-form__input--text"
+                        placeholder="例: 太郎">
                 </div>
                 <div class="contact-form__error">
-                    @error('name')
+                    @error('last_name')
+                        {{ $message }}
+                    @enderror
+                    @error('first_name')
                         {{ $message }}
                     @enderror
                 </div>
@@ -80,9 +85,9 @@
                         class="contact-form__input--text" placeholder="5678">
                 </div>
                 <div class="contact-form__error">
-                    @error('tel1')
-                        {{ $message }}
-                    @enderror
+                    @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
+                        {{ $errors->first('tel1') ?: $errors->first('tel2') ?: $errors->first('tel3') }}
+                    @endif
                 </div>
             </div>
             <div class="contact-form__group">
@@ -105,8 +110,9 @@
                     <label for="building" class="contact-form__label--item">建物名</label>
                 </div>
                 <div class="contact-form__group-content">
-                    <input type="text" id="building" name="building" value="{{ old('building', session('building')) }}"
-                        class="contact-form__input--text" placeholder="例: test@example.com">
+                    <input type="text" id="building" name="building"
+                        value="{{ old('building', session('building')) }}" class="contact-form__input--text"
+                        placeholder="例: test@example.com">
                 </div>
                 <div class="contact-form__error">
                     @error('building')
@@ -123,7 +129,9 @@
                     <select name="category_id" class="contact-form__select" id="category">
                         <option value="">選択してください</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"{{ old('category_id', session('category_id')) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option
+                                value="{{ $category->id }}"{{ old('category_id', session('category_id')) == $category->id ? 'selected' : '' }}>
+                                {{ $category->content }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -17,7 +17,8 @@
                 </tr>
                 <tr class="confirm-form__table-row">
                     <th class="confirm-form__table-title">性別</th>
-                    <td class="confirm-form__table-data">{{ $contact['gender'] }}</td>
+                    <td class="confirm-form__table-data">{{ ['1' => '男性', '2' => '女性', '3' => 'その他'][$contact['gender']] }}
+                    </td>
                 </tr>
                 <tr class="confirm-form__table-row">
                     <th class="confirm-form__table-title">メールアドレス</th>
@@ -37,7 +38,7 @@
                 </tr>
                 <tr class="confirm-form__table-row">
                     <th class="confirm-form__table-title">お問い合わせの種類</th>
-                    <td class="confirm-form__table-data">{{ $contact['category_id'] }}</td>
+                    <td class="confirm-form__table-data">{{ $category->content }}</td>
                 </tr>
                 <tr class="confirm-form__table-row">
                     <th class="confirm-form__table-title">お問い合わせ内容</th>
@@ -50,7 +51,7 @@
             </div>
         </form>
         <div class="confirm__button">
-            <a href="{{ route('contact.index') }}" class="confirm__button-edit">修正</a>
+            <a href="{{ route('contacts.index') }}" class="confirm__button-edit">修正</a>
         </div>
 
 

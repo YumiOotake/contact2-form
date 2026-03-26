@@ -26,6 +26,12 @@ class Contact extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // DBから取ってきて表示するときに使える。つまりadminで一覧表示のときに使える
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->last_name} {$this->first_name}";
+    }
+
     public function getGenderLabelAttribute(): string
     {
         return match ($this->gender) {

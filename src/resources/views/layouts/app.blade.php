@@ -20,7 +20,7 @@
     <header class="header">
         <div class="header__inner">
             <div class="header__logo">
-                <a href="{{ route('contact.index') }}" class="header__logo-link">Fashionably Late</a>
+                <a href="{{ route('contacts.index') }}" class="header__logo-link">Fashionably Late</a>
             </div>
             <nav class="header__nav">
                 @guest
