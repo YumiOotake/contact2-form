@@ -5,7 +5,7 @@
 @section('content')
     <div class="login-form__content">
         <div class="login-form__heading">
-            <h2 class="login-form__heading-ttl">Login</h2>
+            <h2 class="heading-ttl login-form__heading-ttl">Login</h2>
         </div>
         <form action="{{ route('login') }}" method="POST" class="login-form">
             @csrf

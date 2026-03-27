@@ -13,6 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <script src="{{ asset('js/modal.js') }}" defer></script>
     @yield('css')
 </head>
 
@@ -23,24 +24,26 @@
                 <a href="{{ route('contacts.index') }}" class="header__logo-link">Fashionably Late</a>
             </div>
             <nav class="header__nav">
-                @guest
-                    {{-- 現在のURLのパスが 'login' と一致するか判定 --}}
-                    @if (Request::is('login'))
-                        <div class="header__nav-item">
-                            <a href="{{ route('register') }}" class="header__nav-link">register</a>
-                        </div>
-                    @elseif(Request::is('register'))
-                        <div class="header__nav-item">
-                            <a href="{{ route('login') }}" class="header__nav-link">login</a>
-                        </div>
-                    @endif
-                @endguest
-                @auth
-                    <form action="{{ route('logout') }}" method="post" class="header__nav-item">
-                        @csrf
-                        <button type="submit" class="header__nav-link">logout</button>
-                    </form>
-                @endauth
+
+                    @guest
+                        {{-- 現在のURLのパスが 'login' と一致するか判定 --}}
+                        @if (Request::is('login'))
+                            <div class="header__nav-item">
+                                <a href="{{ route('register') }}" class="header__nav-link">register</a>
+                            </div>
+                        @elseif(Request::is('register'))
+                            <div class="header__nav-item">
+                                <a href="{{ route('login') }}" class="header__nav-link">login</a>
+                            </div>
+                        @endif
+                    @endguest
+                    @auth
+                        <form action="{{ route('logout') }}" method="post" class="header__nav-item">
+                            @csrf
+                            <button type="submit" class="header__nav-link">logout</button>
+                        </form>
+                    @endauth
+
             </nav>
         </div>
     </header>

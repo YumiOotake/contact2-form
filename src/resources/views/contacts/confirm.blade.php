@@ -5,7 +5,7 @@
 @section('content')
     <div class="confirm-form__content">
         <div class="confirm-form__heading">
-            <h2 class="confirm-form__heading-ttl">Confirm</h2>
+            <h2 class="heading-ttl confirm-form__heading-ttl">Confirm</h2>
         </div>
         <form action="{{ route('contacts.store') }}" method="POST" class="confirm-form">
             @csrf

@@ -5,7 +5,7 @@
 @section('content')
     <div class="contact-form__content">
         <div class="contact-form__heading">
-            <h2 class="contact-form__heading-ttl">Contact</h2>
+            <h2 class="heading-ttl contact-form__heading-ttl">Contact</h2>
         </div>
         <form action="{{ route('contacts.confirm') }}" method="POST" class="contact-form">
             @csrf
